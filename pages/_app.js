@@ -1,5 +1,17 @@
-import '@/styles/globals.css'
+// import '/styles/globals.css'
+import '@picocss/pico'
+import '/styles/theme.css'
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import Navbar from '../components/Navbar';
+
+
+function App({ Component, pageProps }) {
+  return (
+    <>
+      <Navbar />
+      <Component {...pageProps} />
+    </>
+  );
 }
+
+export default App
