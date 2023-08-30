@@ -1,11 +1,27 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-// import styles from '/styles/Home.module.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import { firestore, postToJSON, getIt } from '../lib/firebase';
+import { Timestamp, query, where, orderBy, limit, collectionGroup, getDocs, startAfter, getFirestore } from 'firebase/firestore';
 
 
+const LIMIT = 5;
+
+export async function getServerSideProps(context) {
+  const ref = collectionGroup(getFirestore(), 'posts');
+  const postsQuery = query(
+    ref,
+    where('published', '==', true),
+    orderBy('createdAt', 'desc'),
+    limit(LIMIT),
+  )
+
+  const posts = (await getDocs(postsQuery)).docs.map(postToJSON);
+ 
+  return {
+    props: { posts }, // will be passed to the page component as props
+  };
+}
 
 
 export default function Home() {
@@ -17,7 +33,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`container ${inter.className}`} >
+      <main className={'container'} >
       
       <h1>Hello</h1>
 
