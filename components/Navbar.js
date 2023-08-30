@@ -19,7 +19,7 @@ export default function Navbar() {
         {username && (
           <>
             <li className="push-left">
-              <Link href="/admin">
+              <Link href="/admin" class="secondary">
                 <p class="">Write Posts</p>
               </Link>
             </li>

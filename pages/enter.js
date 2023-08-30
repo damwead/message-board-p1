@@ -36,7 +36,11 @@ function SignInButton() {
 
 // Sign out button
 function SignOutButton() {
-  return <button onClick={() => auth.signOut()}>Sign Out</button>;
+  return(
+    <section class="container">
+      <button class="outline" onClick={() => auth.signOut()}>Sign Out</button>
+    </section>
+  );
 }
 
 // Username form
@@ -105,7 +109,7 @@ function UsernameForm() {
 
   return (
     !username && (
-      <section>
+      <section class="container">
         <h3>Choose Username</h3>
         <form onSubmit={onSubmit}>
           <input name="username" placeholder="myname" value={formValue} onChange={onChange} />
